@@ -35,7 +35,7 @@ def validate_user_session(id, token):
 def generate_token(request, id, token):
     if not validate_user_session(id, token):
         return JsonResponse({'error': 'Invalid session, Please login again!'})
-    res = gateway.client_token.generate(params={'merchant_account_id': "k7vt7292dg7srwnw"})
+    res = gateway.client_token.generate(params={'merchant_account_id': "45zxhw3rm7vp3hkk"})
     return JsonResponse({'clientToken': res, 'success': True})
 
 

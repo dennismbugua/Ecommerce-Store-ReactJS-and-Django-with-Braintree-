@@ -10,8 +10,8 @@ import 'react-toastify/dist/ReactToastify.css';
 const Signin = () => {
     const [values, setValues] = useState({
         name: "",
-        email: "tarushijauhari@gmail.com",
-        password: "tannu",
+        email: "dennis@starlaunch.org",
+        password: "123456",
         error: "",
         success: false,
         loading: false,

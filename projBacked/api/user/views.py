@@ -37,7 +37,8 @@ def signin(request):
         user = UserModel.objects.get(email=username)
 
         if user.check_password(password):
-            usr_dict = UserModel.objects.filter(email=username).values().first()
+            usr_dict = UserModel.objects.filter(
+                email=username).values().first()
             usr_dict.pop('password')
 
             if user.session_token != "0":
@@ -56,6 +57,7 @@ def signin(request):
     except UserModel.DoesNotExist:
         return JsonResponse({'error': 'Invalid Email'})
 
+
 def signout(request, id):
     logout(request)
 
@@ -70,6 +72,7 @@ def signout(request, id):
 
     return JsonResponse({'success': 'Logout Success'})
 
+
 class UserViewSet(viewsets.ModelViewSet):
     permission_classes_by_action = {'create': [AllowAny]}
 
@@ -81,4 +84,3 @@ class UserViewSet(viewsets.ModelViewSet):
             return [permission() for permission in self.permission_classes_by_action[self.action]]
         except KeyError:
             return [permission() for permission in self.permission_classes]
-

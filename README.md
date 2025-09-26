@@ -217,7 +217,7 @@ GENERATE_SOURCEMAP=false
 ## 🎥 Demo & Documentation
 
 ### **Demo Video**
-[![EcoStore Demo](https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg)](https://youtu.be/jhe_6WUrRqM)
+[![EcoStore Demo](https://github.com/dennismbugua/Ecommerce-Store-ReactJS-and-Django-with-Braintree-/blob/main/projfrontend/public/imgs/ecommerce%20with%20django%20react%20and%20braintree%20-%20Dennis%20Njuguna%20Mbugua.PNG?raw=true)](https://youtu.be/jhe_6WUrRqM)
 
 *Click the image above to watch a comprehensive demo of the EcoStore platform showcasing all major features including product browsing, cart management, user authentication, and secure payment processing.*
 

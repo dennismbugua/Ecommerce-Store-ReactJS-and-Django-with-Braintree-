@@ -222,7 +222,7 @@ GENERATE_SOURCEMAP=false
 *Click the image above to watch a comprehensive demo of the EcoStore platform showcasing all major features including product browsing, cart management, user authentication, and secure payment processing.*
 
 ### **Detailed Blog Article**
-📖 **[Read the Complete Guide](https://dev.to/dennismbugua/building-a-modern-ecommerce-platform-with-react-django-and-braintree)**
+📖 **[Read the Complete Guide](https://dennismbugua.co.ke/articles/building-a-modern-e-commerce-platform-react--django--braintree-integration)**
 
 *Dive deep into the technical implementation, architecture decisions, and best practices used in building this full-stack e-commerce platform.*
 

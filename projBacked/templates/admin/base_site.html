@@ -1,0 +1,42 @@
+{% extends "admin/base.html" %}
+
+{% block extrahead %}
+{{ block.super }}
+<link rel="stylesheet" type="text/css" href="{% load static %}{% static 'admin/css/disable_autocomplete.css' %}" />
+<script>
+    // Global autocomplete disable script
+    (function() {
+        'use strict';
+        
+        function disableAutocomplete() {
+            // Disable autocomplete on all relevant form elements
+            const elements = document.querySelectorAll('input[type="text"], input[type="email"], input[type="password"], input[type="search"], textarea');
+            
+            elements.forEach(function(element) {
+                element.setAttribute('autocomplete', 'off');
+                element.setAttribute('autocapitalize', 'off');
+                element.setAttribute('autocorrect', 'off');
+                element.setAttribute('spellcheck', 'false');
+                element.setAttribute('data-lpignore', 'true');
+                element.setAttribute('data-form-type', 'other');
+            });
+        }
+        
+        // Apply on DOM ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', disableAutocomplete);
+        } else {
+            disableAutocomplete();
+        }
+        
+        // Apply on full page load
+        window.addEventListener('load', disableAutocomplete);
+        
+        // Observe for dynamic content
+        if (typeof MutationObserver !== 'undefined') {
+            const observer = new MutationObserver(disableAutocomplete);
+            observer.observe(document.body, { childList: true, subtree: true });
+        }
+    })();
+</script>
+{% endblock %}

@@ -8,6 +8,10 @@ export const addItemToCart = (item, next) => {
             ...item,
         });
         localStorage.setItem("cart", JSON.stringify(cart));
+        
+        // Dispatch custom event for cart updates
+        window.dispatchEvent(new CustomEvent('cartUpdated'));
+        
         next();
     }
 };
@@ -18,6 +22,7 @@ export const loadCart = () => {
             return JSON.parse(localStorage.getItem("cart"));
         }
     }
+    return []; // Always return an empty array if no cart exists
 };
 
 export const removeItemFromCart = (productId) => {
@@ -33,6 +38,9 @@ export const removeItemFromCart = (productId) => {
             }
         })
         localStorage.setItem("cart", JSON.stringify(cart));
+        
+        // Dispatch custom event for cart updates
+        window.dispatchEvent(new CustomEvent('cartUpdated'));
     };
 
     return cart
@@ -43,6 +51,10 @@ export const emptyCart = (next) => {
         localStorage.removeItem("cart");
         let cart = [];
         localStorage.setItem("cart", JSON.stringify(cart));
+        
+        // Dispatch custom event for cart updates
+        window.dispatchEvent(new CustomEvent('cartUpdated'));
+        
         next();
     }
 };

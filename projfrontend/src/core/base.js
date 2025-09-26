@@ -1,33 +1,29 @@
 import React from 'react'
 import Menu from './Menu';
+import './base.css';
 
 const Base = ({
     title = "My title",
     description = "My description",
-    className = "bg-dark text-white p-4",
+    className = "",
     children
 }) => {
     return (
-        <div>
+        <div className="base-container">
             <Menu />
-            <div className="container-fluid">
-                <div className="jumbotron bg-dark text-white text-center">
-                    <h2 className="display-4">{title}</h2>
-                    <p className="lead">{description}</p>
-                </div>
-                <div className={className}>{children}</div>
-            </div>
-            {/* <footer className="footer bg-dark mt-auto py-3">
-                <div className="container-fluid bg-success text-white text-center py-3">
-                    <h4>If you have any query reach me @ Instagram</h4>
-                    <button className="btn btn-warning btn-lg">Contact Us</button>
-                    <div className="container">
-                        <span className="text-white">
-                            An amazing website
-                        </span>
+            <div className="base-content">
+                {(title || description) && (
+                    <div className="base-header">
+                        <div className="base-header-content">
+                            <h1 className="base-title">{title}</h1>
+                            <p className="base-description">{description}</p>
+                        </div>
                     </div>
+                )}
+                <div className={`base-body ${className}`}>
+                    {children}
                 </div>
-            </footer> */}
+            </div>
         </div>
     );
 }

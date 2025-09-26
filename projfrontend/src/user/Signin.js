@@ -3,9 +3,9 @@ import { Link, Redirect } from "react-router-dom";
 
 import Base from "../core/base";
 import { signin, authenticate, isAuthenticated } from "../auth/helper";
+import { showErrorToast, showSuccessToast, showInfoToast } from "../core/helper/ToastHelper";
 
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import './Signin.css';
 
 const Signin = () => {
     const [values, setValues] = useState({
@@ -36,6 +36,7 @@ const Signin = () => {
                     //let sessionToken = data.token;
                     authenticate(data, () => {
                         console.log("TOKKEN ADDED");
+                        showSuccessToast("🎉 Welcome back! Signing you in...");
                         setValues({
                             ...values,
                             didRedirect: true,
@@ -47,7 +48,7 @@ const Signin = () => {
                         loading: false,
                         error: true
                     });
-                    toast("Check Email Id or password again")
+                    showErrorToast("❌ Invalid email or password. Please try again.");
                 }
             })
             .catch((e) => console.log(e));
@@ -62,8 +63,9 @@ const Signin = () => {
     const loadingMessage = () => {
         return (
             loading && (
-                <div className="alert alert-info">
-                    <h2>Loading...</h2>
+                <div className="loading-container">
+                    <div className="loading-spinner"></div>
+                    <p className="loading-text">Signing you in...</p>
                 </div>
             )
         );
@@ -89,54 +91,98 @@ const Signin = () => {
     };
 
     const errorMessage = () => {
-        return (
-            error && toast("Check Email Id or password again")
-        );
+        return null; // Using toast notifications instead
     };
 
     const signInForm = () => {
         return (
-            <div className="row">
-                <div className="col-md-6 offset-sm-3 text-left">
-                    <form>
-                        <div className="form-group">
-                            <label className="text-light">Email</label>
+            <div className="signin-container">
+                <div className="signin-card">
+                    <div className="signin-header">
+                        <div className="signin-icon">
+                            <i className="fas fa-user-circle"></i>
+                        </div>
+                        <h2 className="signin-title">Welcome Back</h2>
+                        <p className="signin-subtitle">Sign in to your account</p>
+                    </div>
+                    
+                    <form className="signin-form" onSubmit={onSumit}>
+                        <div className="input-group">
+                            <div className="input-icon">
+                                <i className="fas fa-envelope"></i>
+                            </div>
                             <input
                                 name="email"
-                                className="form-control"
+                                className="modern-input"
                                 value={email}
                                 onChange={handleChange("email")}
-                                type="text"
+                                type="email"
+                                placeholder="Enter your email"
+                                required
                             />
+                            <label className="input-label">Email Address</label>
                         </div>
-                        <div className="form-group">
-                            <label className="text-light">password</label>
+                        
+                        <div className="input-group">
+                            <div className="input-icon">
+                                <i className="fas fa-lock"></i>
+                            </div>
                             <input
                                 name="password"
-                                className="form-control"
+                                className="modern-input"
                                 value={password}
                                 onChange={handleChange("password")}
                                 type="password"
+                                placeholder="Enter your password"
+                                required
                             />
+                            <label className="input-label">Password</label>
                         </div>
-                        <center>
-                            <button
-                                onClick={onSumit}
-                                className="btn btn-success btn-block mt-3"
-                            >Login</button>
-                        </center>
+                        
+                        <div className="form-options">
+                            <Link to="/forgot-password" className="forgot-link">
+                                Forgot Password?
+                            </Link>
+                        </div>
+                        
+                        <button
+                            type="submit"
+                            className="signin-btn"
+                            disabled={loading}
+                        >
+                            {loading ? (
+                                <>
+                                    <span className="btn-spinner"></span>
+                                    Signing In...
+                                </>
+                            ) : (
+                                <>
+                                    <i className="fas fa-sign-in-alt"></i>
+                                    Sign In
+                                </>
+                            )}
+                        </button>
+                        
+                        <div className="signup-link">
+                            <p>Don't have an account? <Link to="/signup">Sign up here</Link></p>
+                        </div>
                     </form>
                 </div>
+                
+                {loadingMessage()}
             </div>
         );
     };
 
     return (
-        <Base>
-            {signInForm()}
-            <p className="text-center">{JSON.stringify(values)}</p>
-            {performRedirect()}
-            <ToastContainer />
+        <Base
+            title="Welcome Back! 👋"
+            description="Sign in to your account to continue shopping and access your personal dashboard"
+        >
+            <div className="signin-page">
+                {signInForm()}
+                {performRedirect()}
+            </div>
         </Base>
     )
 }

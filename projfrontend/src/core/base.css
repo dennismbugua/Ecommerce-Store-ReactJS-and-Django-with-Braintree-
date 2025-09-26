@@ -1,0 +1,204 @@
+/* base.css - Modern Theme-Responsive Base Component */
+
+.base-container {
+  min-height: 100vh;
+  background: var(--bg-primary, #faf9f7);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.base-content {
+  position: relative;
+  z-index: 1;
+}
+
+/* Base Header - Seamless Integration */
+.base-header {
+  background: var(--bg-cream, #fefdfb);
+  border-bottom: 1px solid var(--border-color, rgba(248, 245, 240, 0.3));
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.base-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--bg-gradient-secondary, linear-gradient(135deg, #f9fbfc 0%, #eef7fa 100%));
+  opacity: 0.05;
+  pointer-events: none;
+}
+
+.base-header-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 3rem 2rem 2rem;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.base-title {
+  color: var(--text-primary, #2c3e50);
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0 0 1rem 0;
+  line-height: 1.2;
+  transition: color 0.3s ease;
+  animation: titleFadeIn 0.8s ease-out;
+}
+
+.base-description {
+  color: var(--text-secondary, #7f8c8d);
+  font-size: 1.2rem;
+  margin: 0;
+  line-height: 1.5;
+  max-width: 600px;
+  margin: 0 auto;
+  transition: color 0.3s ease;
+  animation: descriptionFadeIn 0.8s ease-out 0.2s both;
+}
+
+.base-body {
+  position: relative;
+  z-index: 1;
+  /* Remove default spacing that causes separation */
+  margin: 0;
+  padding: 0;
+}
+
+/* Animations */
+@keyframes titleFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes descriptionFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Seamless integration with child components */
+.base-body .signup-page,
+.base-body .signin-page,
+.base-body .home-container,
+.base-body .cart-container {
+  /* Remove any top padding/margin that creates visual separation */
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
+/* Theme transitions */
+.base-container,
+.base-header,
+.base-title,
+.base-description {
+  transition: all 0.3s ease;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .base-header-content {
+    padding: 2rem 1rem 1.5rem;
+  }
+  
+  .base-title {
+    font-size: 2rem;
+  }
+  
+  .base-description {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .base-header-content {
+    padding: 1.5rem 0.5rem 1rem;
+  }
+  
+  .base-title {
+    font-size: 1.8rem;
+  }
+  
+  .base-description {
+    font-size: 1rem;
+  }
+}
+
+/* Dark theme specific styles */
+[data-theme="dark"] .base-container {
+  background: var(--bg-primary, #1a1a1a);
+}
+
+[data-theme="dark"] .base-header {
+  background: var(--bg-cream, #1f1f1f);
+  border-bottom-color: var(--border-color, rgba(66, 153, 225, 0.2));
+}
+
+[data-theme="dark"] .base-title {
+  color: var(--text-primary, #e2e8f0);
+}
+
+[data-theme="dark"] .base-description {
+  color: var(--text-secondary, #a0aec0);
+}
+
+/* Ensure smooth transitions when theme changes */
+* {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Remove any unwanted spacing that causes visual separation */
+.base-container > * {
+  margin: 0;
+}
+
+.base-content > * {
+  margin: 0;
+}
+
+/* Special handling for pages that should flow seamlessly */
+.base-body > .signup-page,
+.base-body > .signin-page {
+  min-height: calc(100vh - 200px); /* Adjust based on header height */
+  margin-top: 0;
+  padding-top: 0;
+  background: transparent; /* Let base background show through */
+}
+
+.base-body > .home-container {
+  padding-top: 1rem; /* Minimal spacing for home */
+}
+
+/* Ensure child components inherit theme properly */
+.base-body * {
+  color: inherit;
+  background-color: inherit;
+}
+
+/* Override any conflicting Bootstrap styles */
+.base-body .container-fluid {
+  padding: 0;
+  margin: 0;
+}
+
+.base-body .jumbotron {
+  display: none; /* Hide any old jumbotron styles */
+}

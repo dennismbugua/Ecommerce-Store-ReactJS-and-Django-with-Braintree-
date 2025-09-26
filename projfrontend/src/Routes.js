@@ -1,5 +1,7 @@
 import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import PrivateRoutes from "./auth/helper/PrivateRoutes";
 import Cart from "./core/Cart";
 
@@ -17,8 +19,25 @@ const Routes = () => {
                 <Route path="/signup" exact component={Signup} />
                 <Route path="/signin" exact component={Signin} />
                 <Route path="/cart" exact component={Cart} />
-                <PrivateRoutes path="/user/dashboard" exact component={UserDashBoard} />
+                {/* <PrivateRoutes path="/user/dashboard" exact component={UserDashBoard} /> */}
             </Switch>
+            
+            {/* Global Toast Container with beautiful styling */}
+            <ToastContainer
+                position="top-right"
+                autoClose={4000}
+                hideProgressBar={false}
+                newestOnTop={true}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss={false}
+                draggable
+                pauseOnHover
+                theme="colored"
+                toastClassName="custom-toast"
+                bodyClassName="custom-toast-body"
+                progressClassName="custom-toast-progress"
+            />
         </BrowserRouter>
     );
 };
